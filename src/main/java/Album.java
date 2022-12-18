@@ -3,7 +3,17 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Album implements Serializable {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    protected int id;
     protected String artist;
+
     protected String name;
     protected Date releaseDate;
     protected BigDecimal sales;
