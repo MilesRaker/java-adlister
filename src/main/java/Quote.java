@@ -2,34 +2,24 @@ import java.io.Serializable;
 
 public class Quote implements Serializable {
     protected long id;
-    protected String firstName;
-    protected String lastName;
     protected String content;
+    protected Author author;
 
     public Quote(){}
+    public Author getAuthor() {
+        return author;
+    }
 
-    public int getId() {
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getContent() {
