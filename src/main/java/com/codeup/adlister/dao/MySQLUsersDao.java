@@ -27,9 +27,27 @@ public class MySQLUsersDao implements Users{
         }
     }
     @Override
-    public User findByUsername(String username) {
+    public User findByUsername(String username) throws SQLException {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        ResultSet usernameAndPasswordRs;
+        User user = new User();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            usernameAndPasswordRs = stmt.executeQuery();
+        }catch(SQLException e){
+            throw new RuntimeException("Error querying db for username and password from LoginServlet.java",e);
+        }
 
-        return null;
+        while(usernameAndPasswordRs.next()){
+            user = new User(
+                    usernameAndPasswordRs.getLong("id"),
+                    usernameAndPasswordRs.getString("username"),
+                    usernameAndPasswordRs.getString("email"),
+                    usernameAndPasswordRs.getString("password")
+            );
+        }
+        return user;
     }
 
     @Override
@@ -55,4 +73,6 @@ public class MySQLUsersDao implements Users{
             throw new RuntimeException("Error creating a new ad.", e);
         }
     }
+
+
 }
